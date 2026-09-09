@@ -1,0 +1,1995 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Screening Report | Identity Screening Lab</title>
+
+
+    <style>
+
+        /* =====================================================
+           RESET
+        ===================================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        /* =====================================================
+           BODY
+        ===================================================== */
+
+        body {
+
+            font-family:
+                "Segoe UI",
+                Arial,
+                sans-serif;
+
+            background: #eef2f1;
+
+            color: #1b2926;
+
+            line-height: 1.55;
+
+        }
+
+
+        /* =====================================================
+           PAGE
+        ===================================================== */
+
+        .page {
+
+            width: 92%;
+
+            max-width: 1180px;
+
+            margin: 35px auto 50px;
+
+        }
+
+
+        /* =====================================================
+           TOP HEADER
+        ===================================================== */
+
+        .header {
+
+            background: #182322;
+
+            color: white;
+
+            padding: 32px 38px;
+
+            border-radius: 18px;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: flex-end;
+
+            gap: 25px;
+
+            margin-bottom: 18px;
+
+        }
+
+
+        .brand-line {
+
+            font-size: 11px;
+
+            letter-spacing: 2px;
+
+            text-transform: uppercase;
+
+            color: #9bb8ae;
+
+            margin-bottom: 12px;
+
+        }
+
+
+        .header h1 {
+
+            font-size: 32px;
+
+            font-weight: 500;
+
+            letter-spacing: -1px;
+
+            margin-bottom: 6px;
+
+        }
+
+
+        .header p {
+
+            color: #b6c5c1;
+
+            font-size: 14px;
+
+        }
+
+
+        .report-tag {
+
+            border: 1px solid #526963;
+
+            color: #b8d8ce;
+
+            padding: 8px 13px;
+
+            border-radius: 20px;
+
+            font-size: 10px;
+
+            letter-spacing: 1.5px;
+
+            text-transform: uppercase;
+
+            white-space: nowrap;
+
+        }
+
+
+        /* =====================================================
+           SCORE HERO
+        ===================================================== */
+
+        .score-hero {
+
+            background: white;
+
+            border: 1px solid #d6dfdc;
+
+            border-radius: 18px;
+
+            padding: 30px 35px;
+
+            display: grid;
+
+            grid-template-columns: 1fr auto;
+
+            align-items: center;
+
+            gap: 30px;
+
+            margin-bottom: 20px;
+
+            box-shadow:
+                0 10px 30px rgba(25, 45, 40, 0.06);
+
+        }
+
+
+        .eyebrow {
+
+            color: #70817c;
+
+            font-size: 10px;
+
+            text-transform: uppercase;
+
+            letter-spacing: 2px;
+
+            margin-bottom: 8px;
+
+        }
+
+
+        .score {
+
+            font-size: 58px;
+
+            line-height: 1;
+
+            font-weight: 500;
+
+            letter-spacing: -2px;
+
+            color: #182322;
+
+        }
+
+
+        .score span {
+
+            font-size: 18px;
+
+            color: #879590;
+
+            letter-spacing: 0;
+
+        }
+
+
+        .score-description {
+
+            margin-top: 10px;
+
+            color: #697873;
+
+            font-size: 13px;
+
+        }
+
+
+        .risk {
+
+            min-width: 155px;
+
+            text-align: center;
+
+            padding: 16px 22px;
+
+            border-radius: 12px;
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            letter-spacing: 1px;
+
+        }
+
+
+        .risk-low {
+
+            background: #e5f1eb;
+
+            color: #276348;
+
+        }
+
+
+        .risk-review {
+
+            background: #f5edda;
+
+            color: #806322;
+
+        }
+
+
+        .risk-high {
+
+            background: #f4e1df;
+
+            color: #8b3932;
+
+        }
+
+
+        /* =====================================================
+           GRID
+        ===================================================== */
+
+        .grid {
+
+            display: grid;
+
+            grid-template-columns: repeat(2, 1fr);
+
+            gap: 18px;
+
+            margin-bottom: 18px;
+
+        }
+
+
+        /* =====================================================
+           CARD
+        ===================================================== */
+
+        .card {
+
+            background: white;
+
+            border: 1px solid #d6dfdc;
+
+            border-radius: 16px;
+
+            padding: 25px;
+
+            margin-bottom: 18px;
+
+        }
+
+
+        .grid .card {
+
+            margin-bottom: 0;
+
+        }
+
+
+        .card h2 {
+
+            font-size: 17px;
+
+            font-weight: 600;
+
+            color: #23332f;
+
+            margin-bottom: 18px;
+
+        }
+
+
+        .section-number {
+
+            color: #82928d;
+
+            font-size: 10px;
+
+            letter-spacing: 1.5px;
+
+            margin-bottom: 5px;
+
+        }
+
+
+        /* =====================================================
+           INFO ROW
+        ===================================================== */
+
+        .info-row {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            gap: 20px;
+
+            padding: 11px 0;
+
+            border-bottom: 1px solid #e8eeec;
+
+        }
+
+
+        .info-row:last-child {
+
+            border-bottom: none;
+
+        }
+
+
+        .label {
+
+            color: #788883;
+
+            font-size: 13px;
+
+        }
+
+
+        .value {
+
+            color: #273631;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            text-align: right;
+
+            word-break: break-word;
+
+        }
+
+
+        /* =====================================================
+           SCORE BREAKDOWN
+        ===================================================== */
+
+        .score-component {
+
+            margin-bottom: 18px;
+
+        }
+
+
+        .score-component:last-child {
+
+            margin-bottom: 0;
+
+        }
+
+
+        .component-header {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            gap: 15px;
+
+            margin-bottom: 7px;
+
+            font-size: 12px;
+
+        }
+
+
+        .component-name {
+
+            color: #4e605b;
+
+        }
+
+
+        .component-value {
+
+            color: #263732;
+
+            font-weight: 700;
+
+        }
+
+
+        .progress {
+
+            height: 7px;
+
+            background: #e5ece9;
+
+            border-radius: 20px;
+
+            overflow: hidden;
+
+        }
+
+
+        .progress-bar {
+
+            height: 100%;
+
+            background: #4d7468;
+
+            border-radius: 20px;
+
+        }
+
+
+        /* =====================================================
+           EXTRACTED INFORMATION
+        ===================================================== */
+
+        .empty {
+
+            color: #87948f;
+
+            font-size: 13px;
+
+            padding: 8px 0;
+
+        }
+
+
+        /* =====================================================
+           VALIDATION
+        ===================================================== */
+
+        .validation-row {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            gap: 20px;
+
+            padding: 14px 0;
+
+            border-bottom: 1px solid #e8eeec;
+
+        }
+
+
+        .validation-row:last-child {
+
+            border-bottom: none;
+
+        }
+
+
+        .validation-name {
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            color: #30403b;
+
+        }
+
+
+        .validation-reason {
+
+            color: #7b8985;
+
+            font-size: 12px;
+
+            margin-top: 3px;
+
+        }
+
+
+        .status {
+
+            padding: 5px 11px;
+
+            border-radius: 20px;
+
+            font-size: 10px;
+
+            font-weight: 700;
+
+            letter-spacing: 1px;
+
+            white-space: nowrap;
+
+        }
+
+
+        .pass {
+
+            background: #e3f1e9;
+
+            color: #2b654a;
+
+        }
+
+
+        .fail {
+
+            background: #f5e3e1;
+
+            color: #914039;
+
+        }
+
+
+        /* =====================================================
+           EVIDENCE
+        ===================================================== */
+
+        .evidence-list {
+
+            list-style: none;
+
+            display: grid;
+
+            gap: 9px;
+
+        }
+
+
+        .evidence-list li {
+
+            padding: 12px 14px;
+
+            background: #f4f7f5;
+
+            border-left: 3px solid #66877c;
+
+            border-radius: 7px;
+
+            font-size: 13px;
+
+            color: #43534e;
+
+        }
+
+
+        /* =====================================================
+           ANALYSIS BOX
+        ===================================================== */
+
+        .analysis-box {
+
+            padding: 20px;
+
+            background: #f5f8f7;
+
+            border-radius: 12px;
+
+        }
+
+
+        .analysis-clean {
+
+            border-left: 4px solid #54806f;
+
+        }
+
+
+        .analysis-warning {
+
+            border-left: 4px solid #b87938;
+
+        }
+
+
+        .analysis-title {
+
+            font-weight: 700;
+
+            font-size: 14px;
+
+            margin-bottom: 6px;
+
+        }
+
+
+        .analysis-box p {
+
+            font-size: 13px;
+
+            color: #687873;
+
+        }
+
+
+        /* =====================================================
+           FACE / IDENTITY
+        ===================================================== */
+
+        .identity-box {
+
+            padding: 22px;
+
+            border-radius: 12px;
+
+        }
+
+
+        .identity-match {
+
+            background: #e8f2ed;
+
+            border-left: 4px solid #4b7d69;
+
+        }
+
+
+        .identity-mismatch {
+
+            background: #f6e5e3;
+
+            border-left: 4px solid #a84b42;
+
+        }
+
+
+        .identity-unavailable {
+
+            background: #f5eee0;
+
+            border-left: 4px solid #b1823c;
+
+        }
+
+
+        .identity-title {
+
+            font-size: 15px;
+
+            font-weight: 700;
+
+            margin-bottom: 7px;
+
+        }
+
+
+        .identity-box p {
+
+            font-size: 13px;
+
+            color: #65746f;
+
+        }
+
+
+        /* =====================================================
+           WHY SECTION
+        ===================================================== */
+
+        .why {
+
+            background: #182322;
+
+            color: white;
+
+            padding: 28px;
+
+            border-radius: 16px;
+
+            margin-bottom: 18px;
+
+        }
+
+
+        .why .section-number {
+
+            color: #8fa9a1;
+
+        }
+
+
+        .why h2 {
+
+            font-size: 20px;
+
+            font-weight: 500;
+
+            margin-bottom: 18px;
+
+        }
+
+
+        .why-item {
+
+            display: flex;
+
+            gap: 13px;
+
+            padding: 12px 0;
+
+            border-bottom: 1px solid #354441;
+
+            color: #d0dbd7;
+
+            font-size: 13px;
+
+        }
+
+
+        .why-item:last-child {
+
+            border-bottom: none;
+
+        }
+
+
+        .why-dot {
+
+            width: 7px;
+
+            height: 7px;
+
+            border-radius: 50%;
+
+            background: #9dbdb2;
+
+            margin-top: 7px;
+
+            flex-shrink: 0;
+
+        }
+
+
+        /* =====================================================
+           DISCLAIMER
+        ===================================================== */
+
+        .disclaimer {
+
+            background: #f7f2e7;
+
+            border: 1px solid #e5d8bb;
+
+            color: #755f35;
+
+            padding: 16px 18px;
+
+            border-radius: 10px;
+
+            font-size: 12px;
+
+            margin-bottom: 22px;
+
+        }
+
+
+        /* =====================================================
+           ACTIONS
+        ===================================================== */
+
+        .actions {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            gap: 15px;
+
+        }
+
+
+        .btn {
+
+            display: inline-block;
+
+            padding: 12px 20px;
+
+            border-radius: 9px;
+
+            text-decoration: none;
+
+            font-size: 12px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+            border: none;
+
+        }
+
+
+        .btn-primary {
+
+            background: #182322;
+
+            color: white;
+
+        }
+
+
+        .btn-secondary {
+
+            background: #dfe7e4;
+
+            color: #263631;
+
+        }
+
+
+        .btn:hover {
+
+            opacity: 0.88;
+
+        }
+
+
+        /* =====================================================
+           PRINT
+        ===================================================== */
+
+        @media print {
+
+            body {
+
+                background: white;
+
+            }
+
+
+            .page {
+
+                width: 100%;
+
+                margin: 0;
+
+            }
+
+
+            .actions {
+
+                display: none;
+
+            }
+
+
+            .header,
+            .why {
+
+                print-color-adjust: exact;
+
+                -webkit-print-color-adjust: exact;
+
+            }
+
+
+            .card,
+            .score-hero {
+
+                box-shadow: none;
+
+            }
+
+        }
+
+
+        /* =====================================================
+           MOBILE
+        ===================================================== */
+
+        @media (max-width: 760px) {
+
+            .page {
+
+                width: 94%;
+
+                margin-top: 20px;
+
+            }
+
+
+            .header {
+
+                flex-direction: column;
+
+                align-items: flex-start;
+
+                padding: 25px;
+
+            }
+
+
+            .header h1 {
+
+                font-size: 26px;
+
+            }
+
+
+            .score-hero {
+
+                grid-template-columns: 1fr;
+
+                padding: 25px;
+
+            }
+
+
+            .score {
+
+                font-size: 48px;
+
+            }
+
+
+            .risk {
+
+                width: 100%;
+
+            }
+
+
+            .grid {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            .info-row {
+
+                align-items: flex-start;
+
+                flex-direction: column;
+
+                gap: 3px;
+
+            }
+
+
+            .value {
+
+                text-align: left;
+
+            }
+
+
+            .actions {
+
+                flex-direction: column;
+
+                align-items: stretch;
+
+            }
+
+
+            .btn {
+
+                text-align: center;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="page">
+
+
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
+
+    <header class="header">
+
+
+        <div>
+
+            <div class="brand-line">
+                Identity Screening Lab · Assessment Report
+            </div>
+
+
+            <h1>
+                Document Screening Result
+            </h1>
+
+
+            <p>
+                AI-assisted fake identity & document screening system
+            </p>
+
+        </div>
+
+
+        <div class="report-tag">
+            Screening complete
+        </div>
+
+
+    </header>
+
+
+
+    <!-- =====================================================
+         OVERALL SCORE
+    ====================================================== -->
+
+    <section class="score-hero">
+
+
+        <div>
+
+            <div class="eyebrow">
+                Overall screening score
+            </div>
+
+
+            <div class="score">
+
+                {{ final_result["total_score"] }}
+
+                <span>/ 100</span>
+
+            </div>
+
+
+            <p class="score-description">
+
+                Composite result based on the implemented
+                document, field, image and identity checks.
+
+            </p>
+
+        </div>
+
+
+        <div>
+
+            {% if final_result["risk_level"] == "LOW RISK" %}
+
+                <div class="risk risk-low">
+                    LOW RISK
+                </div>
+
+
+            {% elif final_result["risk_level"] == "NEEDS REVIEW" %}
+
+                <div class="risk risk-review">
+                    NEEDS REVIEW
+                </div>
+
+
+            {% else %}
+
+                <div class="risk risk-high">
+                    HIGH RISK
+                </div>
+
+            {% endif %}
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =====================================================
+         IDENTIFICATION + SCORE
+    ====================================================== -->
+
+    <div class="grid">
+
+
+        <!-- DOCUMENT IDENTIFICATION -->
+
+        <section class="card">
+
+            <div class="section-number">
+                01 · DOCUMENT
+            </div>
+
+
+            <h2>
+                Document Identification
+            </h2>
+
+
+            <div class="info-row">
+
+                <span class="label">
+                    Document Type
+                </span>
+
+                <span class="value">
+                    {{ document_result["document_type"] }}
+                </span>
+
+            </div>
+
+
+            <div class="info-row">
+
+                <span class="label">
+                    Detection Confidence
+                </span>
+
+                <span class="value">
+                    {{ document_result["confidence"] }}%
+                </span>
+
+            </div>
+
+
+            <div class="info-row">
+
+                <span class="label">
+                    Identification Score
+                </span>
+
+                <span class="value">
+                    {{ final_result["component_scores"]["document_identification"] }} / 20
+                </span>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- SCORE BREAKDOWN -->
+
+        <section class="card">
+
+            <div class="section-number">
+                02 · ASSESSMENT
+            </div>
+
+
+            <h2>
+                Score Breakdown
+            </h2>
+
+
+            <!-- DOCUMENT -->
+
+            <div class="score-component">
+
+                <div class="component-header">
+
+                    <span class="component-name">
+                        Document Identification
+                    </span>
+
+                    <span class="component-value">
+                        {{ final_result["component_scores"]["document_identification"] }} / 20
+                    </span>
+
+                </div>
+
+
+                <div class="progress">
+
+                    <div
+                        class="progress-bar"
+                        style="width: {{ (final_result['component_scores']['document_identification'] / 20) * 100 }}%;">
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- FIELD -->
+
+            <div class="score-component">
+
+                <div class="component-header">
+
+                    <span class="component-name">
+                        Field Validation
+                    </span>
+
+                    <span class="component-value">
+                        {{ final_result["component_scores"]["field_validation"] }} / 30
+                    </span>
+
+                </div>
+
+
+                <div class="progress">
+
+                    <div
+                        class="progress-bar"
+                        style="width: {{ (final_result['component_scores']['field_validation'] / 30) * 100 }}%;">
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- TAMPER -->
+
+            <div class="score-component">
+
+                <div class="component-header">
+
+                    <span class="component-name">
+                        Tamper Analysis
+                    </span>
+
+                    <span class="component-value">
+                        {{ final_result["component_scores"]["tamper_analysis"] }} / 25
+                    </span>
+
+                </div>
+
+
+                <div class="progress">
+
+                    <div
+                        class="progress-bar"
+                        style="width: {{ (final_result['component_scores']['tamper_analysis'] / 25) * 100 }}%;">
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- FACE -->
+
+            <div class="score-component">
+
+                <div class="component-header">
+
+                    <span class="component-name">
+                        Identity Matching
+                    </span>
+
+                    <span class="component-value">
+                        {{ final_result["component_scores"]["face_matching"] }} / 25
+                    </span>
+
+                </div>
+
+
+                <div class="progress">
+
+                    <div
+                        class="progress-bar"
+                        style="width: {{ (final_result['component_scores']['face_matching'] / 25) * 100 }}%;">
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+    </div>
+
+
+
+    <!-- =====================================================
+         EXTRACTED FIELDS
+    ====================================================== -->
+
+    <section class="card">
+
+
+        <div class="section-number">
+            03 · EXTRACTION
+        </div>
+
+
+        <h2>
+            Extracted Document Information
+        </h2>
+
+
+        {% if fields %}
+
+
+            {% for field, value in fields.items() %}
+
+
+                <div class="info-row">
+
+                    <span class="label">
+
+                        {{ field.replace("_", " ").title() }}
+
+                    </span>
+
+
+                    <span class="value">
+
+                        {% if value %}
+
+                            {{ value }}
+
+                        {% else %}
+
+                            Not detected
+
+                        {% endif %}
+
+                    </span>
+
+                </div>
+
+
+            {% endfor %}
+
+
+        {% else %}
+
+            <p class="empty">
+                No document-specific fields were extracted.
+            </p>
+
+        {% endif %}
+
+
+    </section>
+
+
+
+    <!-- =====================================================
+         FIELD VALIDATION
+    ====================================================== -->
+
+    <section class="card">
+
+
+        <div class="section-number">
+            04 · VALIDATION
+        </div>
+
+
+        <h2>
+            Field Validation
+        </h2>
+
+
+        {% if validation_result %}
+
+
+            {% for field, result in validation_result.items() %}
+
+
+                <div class="validation-row">
+
+
+                    <div>
+
+                        <div class="validation-name">
+
+                            {{ field.replace("_", " ").title() }}
+
+                        </div>
+
+
+                        <div class="validation-reason">
+
+                            {{ result["reason"] }}
+
+                        </div>
+
+                    </div>
+
+
+                    {% if result["valid"] %}
+
+                        <span class="status pass">
+                            PASS
+                        </span>
+
+                    {% else %}
+
+                        <span class="status fail">
+                            FAIL
+                        </span>
+
+                    {% endif %}
+
+
+                </div>
+
+
+            {% endfor %}
+
+
+        {% else %}
+
+            <p class="empty">
+                No document-specific validation was available.
+            </p>
+
+        {% endif %}
+
+
+    </section>
+
+
+
+    <!-- =====================================================
+         DOCUMENT EVIDENCE
+    ====================================================== -->
+
+    <section class="card">
+
+
+        <div class="section-number">
+            05 · EVIDENCE
+        </div>
+
+
+        <h2>
+            Document Identification Evidence
+        </h2>
+
+
+        {% if document_result["clues"] %}
+
+
+            <ul class="evidence-list">
+
+
+                {% for clue in document_result["clues"] %}
+
+                    <li>
+                        {{ clue }}
+                    </li>
+
+                {% endfor %}
+
+
+            </ul>
+
+
+        {% else %}
+
+            <p class="empty">
+                No identification evidence was found.
+            </p>
+
+        {% endif %}
+
+
+    </section>
+
+
+
+    <!-- =====================================================
+         IMAGE ANALYSIS + FACE DETECTION
+    ====================================================== -->
+
+    <div class="grid">
+
+
+        <!-- TAMPER -->
+
+        <section class="card">
+
+
+            <div class="section-number">
+                06 · IMAGE INTEGRITY
+            </div>
+
+
+            <h2>
+                Tamper / Image Analysis
+            </h2>
+
+
+            <div class="info-row">
+
+                <span class="label">
+                    Mean Difference
+                </span>
+
+                <span class="value">
+                    {{ ela_result["mean_difference"] }}
+                </span>
+
+            </div>
+
+
+            <div class="info-row">
+
+                <span class="label">
+                    Maximum Difference
+                </span>
+
+                <span class="value">
+                    {{ ela_result["max_difference"] }}
+                </span>
+
+            </div>
+
+
+            <div class="info-row">
+
+                <span class="label">
+                    High Difference Pixels
+                </span>
+
+                <span class="value">
+                    {{ ela_result["high_difference_percentage"] }}%
+                </span>
+
+            </div>
+
+
+            <div class="info-row">
+
+                <span class="label">
+                    Suspicious Regions
+                </span>
+
+                <span class="value">
+                    {{ ela_result["suspicious_regions"] | length }}
+                </span>
+
+            </div>
+
+
+            {% if ela_result["suspicious_regions"] | length == 0
+                  and ela_result["high_difference_percentage"] <= 1 %}
+
+
+                <div class="analysis-box analysis-clean">
+
+                    <div class="analysis-title">
+                        ✓ No significant suspicious regions
+                    </div>
+
+                    <p>
+                        ELA did not detect significant
+                        localized differences under the
+                        current screening threshold.
+                    </p>
+
+                </div>
+
+
+            {% else %}
+
+
+                <div class="analysis-box analysis-warning">
+
+                    <div class="analysis-title">
+                        ⚠ Potentially suspicious regions
+                    </div>
+
+                    <p>
+                        Image differences were detected
+                        and should be reviewed.
+                    </p>
+
+                </div>
+
+
+            {% endif %}
+
+
+        </section>
+
+
+
+        <!-- FACE DETECTION -->
+
+        <section class="card">
+
+
+            <div class="section-number">
+                07 · FACE DETECTION
+            </div>
+
+
+            <h2>
+                Document Face Detection
+            </h2>
+
+
+            {% if document_face_result["success"] %}
+
+
+                <div class="identity-box identity-match">
+
+
+                    <div class="identity-title">
+                        ✓ Face Detected
+                    </div>
+
+
+                    <p>
+                        A face was successfully detected
+                        inside the uploaded identity document.
+                    </p>
+
+
+                    <br>
+
+
+                    <div class="info-row">
+
+                        <span class="label">
+                            Detection Confidence
+                        </span>
+
+                        <span class="value">
+                            {{ document_face_result["confidence"] }}
+                        </span>
+
+                    </div>
+
+
+                    {% if document_face_result["bounding_box"] %}
+
+                        <div class="info-row">
+
+                            <span class="label">
+                                Face Location
+                            </span>
+
+                            <span class="value">
+                                {{ document_face_result["bounding_box"] }}
+                            </span>
+
+                        </div>
+
+                    {% endif %}
+
+
+                </div>
+
+
+            {% else %}
+
+
+                <div class="identity-box identity-unavailable">
+
+
+                    <div class="identity-title">
+                        ⚠ Face Not Detected
+                    </div>
+
+
+                    <p>
+                        {{ document_face_result["reason"] }}
+                    </p>
+
+
+                </div>
+
+
+            {% endif %}
+
+
+        </section>
+
+
+    </div>
+
+
+
+    <!-- =====================================================
+         IDENTITY MATCHING
+    ====================================================== -->
+
+    <section class="card">
+
+
+        <div class="section-number">
+            08 · IDENTITY
+        </div>
+
+
+        <h2>
+            Identity Matching
+        </h2>
+
+
+        {% if face_result["success"] %}
+
+
+            {% if face_result["result"] == "MATCH" %}
+
+
+                <div class="identity-box identity-match">
+
+
+                    <div class="identity-title">
+                        ✓ IDENTITY MATCH
+                    </div>
+
+
+                    <p>
+                        The face detected from the document
+                        matches the provided selfie.
+                    </p>
+
+
+                    <br>
+
+
+                    <div class="info-row">
+
+                        <span class="label">
+                            Similarity Score
+                        </span>
+
+                        <span class="value">
+                            {{ face_result["similarity"] }}
+                        </span>
+
+                    </div>
+
+
+                    <div class="info-row">
+
+                        <span class="label">
+                            Matching Threshold
+                        </span>
+
+                        <span class="value">
+                            {{ face_result["threshold"] }}
+                        </span>
+
+                    </div>
+
+
+                </div>
+
+
+            {% else %}
+
+
+                <div class="identity-box identity-mismatch">
+
+
+                    <div class="identity-title">
+                        ⚠ IDENTITY MISMATCH
+                    </div>
+
+
+                    <p>
+                        The face detected from the document
+                        does not sufficiently match the
+                        provided selfie.
+                    </p>
+
+
+                    <br>
+
+
+                    <div class="info-row">
+
+                        <span class="label">
+                            Similarity Score
+                        </span>
+
+                        <span class="value">
+                            {{ face_result["similarity"] }}
+                        </span>
+
+                    </div>
+
+
+                    <div class="info-row">
+
+                        <span class="label">
+                            Matching Threshold
+                        </span>
+
+                        <span class="value">
+                            {{ face_result["threshold"] }}
+                        </span>
+
+                    </div>
+
+
+                </div>
+
+
+            {% endif %}
+
+
+        {% else %}
+
+
+            <div class="identity-box identity-unavailable">
+
+
+                <div class="identity-title">
+                    IDENTITY CHECK UNAVAILABLE
+                </div>
+
+
+                <p>
+                    {{ face_result["reason"] }}
+                </p>
+
+
+            </div>
+
+
+        {% endif %}
+
+
+    </section>
+
+
+
+    <!-- =====================================================
+         WHY
+    ====================================================== -->
+
+    <section class="why">
+
+
+        <div class="section-number">
+            09 · EXPLANATION
+        </div>
+
+
+        <h2>
+            Why was this result given?
+        </h2>
+
+
+        {% if final_result["reasons"] %}
+
+
+            {% for reason in final_result["reasons"] %}
+
+
+                <div class="why-item">
+
+                    <span class="why-dot"></span>
+
+                    <span>
+                        {{ reason }}
+                    </span>
+
+                </div>
+
+
+            {% endfor %}
+
+
+        {% else %}
+
+            <div class="why-item">
+
+                <span class="why-dot"></span>
+
+                <span>
+                    No explanation was generated.
+                </span>
+
+            </div>
+
+        {% endif %}
+
+
+    </section>
+
+
+
+    <!-- =====================================================
+         DISCLAIMER
+    ====================================================== -->
+
+    <div class="disclaimer">
+
+        <strong>Important:</strong>
+
+        This system provides an automated screening
+        assessment based on document structure,
+        extracted fields, image analysis and
+        identity matching.
+
+        A screening result should not be treated as
+        conclusive proof of document authenticity
+        or fraud.
+
+    </div>
+
+
+
+    <!-- =====================================================
+         ACTIONS
+    ====================================================== -->
+
+    <div class="actions">
+
+
+        <a
+            href="/"
+            class="btn btn-primary">
+
+            ← Analyze Another Document
+
+        </a>
+
+
+        <button
+            onclick="window.print()"
+            class="btn btn-secondary">
+
+            Print Screening Report
+
+        </button>
+
+
+    </div>
+
+
+</div>
+
+
+</body>
+
+</html>
