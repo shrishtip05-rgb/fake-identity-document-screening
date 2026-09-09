@@ -4,10 +4,11 @@
 
 import re
 import difflib
+import os
+import shutil
 
 import cv2
 import pytesseract
-
 from PIL import Image
 
 
@@ -15,9 +16,20 @@ from PIL import Image
 # TESSERACT CONFIGURATION
 # =========================================================
 
-pytesseract.pytesseract.tesseract_cmd = (
-    r"C:\Program Files\Tesseract-OCR\tesseract.exe"
-)
+# Try to find Tesseract automatically.
+# This works when Tesseract is available in the system PATH.
+tesseract_path = shutil.which("tesseract")
+
+if tesseract_path:
+    pytesseract.pytesseract.tesseract_cmd = tesseract_path
+
+else:
+    # Windows fallback.
+    # This is the standard installation location on your laptop.
+    windows_tesseract = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+
+    if os.path.exists(windows_tesseract):
+        pytesseract.pytesseract.tesseract_cmd = windows_tesseract
 
 
 # =========================================================
