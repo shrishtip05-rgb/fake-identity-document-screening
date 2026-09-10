@@ -320,12 +320,10 @@ def extract_text(file_path):
 
 
     configs = [
-        "--psm 6",
-        "--psm 11",
-        "--psm 12",
-        "--psm 3"
-    ]
-
+    "--psm 6",
+    "--psm 11"
+]
+    
 
     for variant_name, image in variants:
 
