@@ -99,7 +99,7 @@ def allowed_file(filename):
         in ALLOWED_EXTENSIONS
     )
 
-def resize_image_for_processing(input_path, output_path, max_dimension=2000):
+def resize_image_for_processing(input_path, output_path, max_dimension=1200):
     """
     Create a smaller copy of an uploaded image for processing.
 
