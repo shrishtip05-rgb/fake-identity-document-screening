@@ -53,8 +53,10 @@ def run_tesseract(image, config="--psm 6"):
 
 def preprocess_variants(file_path):
     """
-    Create multiple image versions so that OCR has
-    several chances to read the document correctly.
+    Create a small number of image versions for OCR.
+
+    The goal is to keep OCR reliable while reducing
+    memory usage and processing time on the server.
     """
 
     image = cv2.imread(file_path)
@@ -62,33 +64,22 @@ def preprocess_variants(file_path):
     if image is None:
         return []
 
-
     variants = []
 
+    # =====================================================
+    # ORIGINAL
+    # =====================================================
 
-    # Original
     variants.append(
         ("original", image)
     )
 
+    # =====================================================
+    # GRAYSCALE
+    # =====================================================
 
-    # Upscaled
-    upscaled = cv2.resize(
-        image,
-        None,
-        fx=3,
-        fy=3,
-        interpolation=cv2.INTER_CUBIC
-    )
-
-    variants.append(
-        ("upscaled", upscaled)
-    )
-
-
-    # Grayscale
     gray = cv2.cvtColor(
-        upscaled,
+        image,
         cv2.COLOR_BGR2GRAY
     )
 
@@ -96,8 +87,10 @@ def preprocess_variants(file_path):
         ("grayscale", gray)
     )
 
+    # =====================================================
+    # CONTRAST ENHANCEMENT
+    # =====================================================
 
-    # Contrast enhancement
     clahe = cv2.createCLAHE(
         clipLimit=2.0,
         tileGridSize=(8, 8)
@@ -109,57 +102,7 @@ def preprocess_variants(file_path):
         ("contrast_enhanced", enhanced)
     )
 
-
-    # OTSU
-    _, otsu = cv2.threshold(
-        enhanced,
-        0,
-        255,
-        cv2.THRESH_BINARY + cv2.THRESH_OTSU
-    )
-
-    variants.append(
-        ("otsu", otsu)
-    )
-
-
-    # Adaptive threshold
-    adaptive = cv2.adaptiveThreshold(
-        enhanced,
-        255,
-        cv2.ADAPTIVE_THRESH_GAUSSIAN_C,
-        cv2.THRESH_BINARY,
-        31,
-        11
-    )
-
-    variants.append(
-        ("adaptive", adaptive)
-    )
-
-
-    # Sharpening
-    blurred = cv2.GaussianBlur(
-        enhanced,
-        (0, 0),
-        3
-    )
-
-    sharpened = cv2.addWeighted(
-        enhanced,
-        1.5,
-        blurred,
-        -0.5,
-        0
-    )
-
-    variants.append(
-        ("sharpened", sharpened)
-    )
-
-
     return variants
-
 
 # =========================================================
 # OCR QUALITY SCORE
