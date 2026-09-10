@@ -20,4 +20,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # Render provides the PORT environment variable
-CMD gunicorn --bind 0.0.0.0:$PORT app:app
+CMD gunicorn --timeout 120 --workers 1 --bind 0.0.0.0:$PORT app:app
