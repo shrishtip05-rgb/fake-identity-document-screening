@@ -13,6 +13,8 @@ from werkzeug.utils import secure_filename
 import os
 import uuid
 
+from PIL import Image
+
 
 # =========================================================
 # PIPELINE MODULES
@@ -40,6 +42,7 @@ from pipeline import scoring
 
 app = Flask(__name__)
 
+Image.MAX_IMAGE_PIXELS = 20_000_000
 
 # =========================================================
 # UPLOAD CONFIGURATION
@@ -96,7 +99,62 @@ def allowed_file(filename):
         in ALLOWED_EXTENSIONS
     )
 
+def resize_image_for_processing(input_path, output_path, max_dimension=2000):
+    """
+    Create a smaller copy of an uploaded image for processing.
 
+    Large images can consume a lot of RAM when processed by
+    OCR and OpenCV. This function keeps the original image
+    unchanged and creates a resized processing copy.
+
+    The aspect ratio is preserved.
+    """
+
+    image = Image.open(input_path)
+
+    width, height = image.size
+
+    # JPEG does not support transparency or palette mode.
+    # Convert these modes to RGB before saving the
+    # processing copy as a JPEG.
+    if image.mode in ("RGBA", "P"):
+        image = image.convert("RGB")
+
+    # If the image is already small enough,
+    # simply create a JPEG processing copy.
+    if max(width, height) <= max_dimension:
+
+        image.save(
+            output_path,
+            quality=90,
+            optimize=True
+        )
+
+        image.close()
+
+        return
+
+    # Calculate the scaling factor while preserving
+    # the original aspect ratio.
+    scale = max_dimension / max(width, height)
+
+    new_width = int(width * scale)
+    new_height = int(height * scale)
+
+    # Resize the image using high-quality resampling.
+    resized_image = image.resize(
+        (new_width, new_height),
+        Image.Resampling.LANCZOS
+    )
+
+    resized_image.save(
+        output_path,
+        quality=90,
+        optimize=True
+    )
+
+    resized_image.close()
+    image.close()
 # =========================================================
 # CREATE UPLOAD FOLDER
 # =========================================================
@@ -258,6 +316,37 @@ def analyze():
     selfie.save(
         selfie_path
     )
+    # =====================================================
+    # CREATE RESIZED PROCESSING COPIES
+    # =====================================================
+
+    # Keep the original uploaded files unchanged.
+    # The smaller copies will be used by OCR and OpenCV
+    # to reduce RAM usage on the Render server.
+
+    document_processing_path = os.path.join(
+        UPLOAD_FOLDER,
+        unique_id + "_document_processing.jpg"
+    )
+
+
+    selfie_processing_path = os.path.join(
+        UPLOAD_FOLDER,
+        unique_id + "_selfie_processing.jpg"
+    )
+
+
+    resize_image_for_processing(
+        document_path,
+        document_processing_path
+    )
+
+
+    resize_image_for_processing(
+        selfie_path,
+        selfie_processing_path
+    )
+
 
 
     # =====================================================
@@ -286,7 +375,7 @@ def analyze():
     try:
 
         ocr_text = ocr.extract_text(
-            document_path
+            document_processing_path
         )
 
     except Exception as error:
@@ -391,7 +480,7 @@ def analyze():
 
         ela_result = (
             tamper_analysis.perform_ela(
-                document_path
+               document_processing_path
             )
         )
 
@@ -421,7 +510,7 @@ def analyze():
 
         ocr_data = (
             ocr.extract_data(
-                document_path
+               document_processing_path
             )
         )
 
@@ -504,7 +593,7 @@ def analyze():
     document_face_result = (
         document_face_extraction
         .detect_document_face(
-            document_path
+            document_processing_path
         )
     )
 
@@ -526,7 +615,7 @@ def analyze():
                     "face_path"
                 ],
 
-                selfie_path
+                selfie_processing_path
             )
         )
 
@@ -573,7 +662,7 @@ def analyze():
     # RESULT PAGE
     # =====================================================
 
-    return render_template(
+    result_page = render_template(
 
         "result.html",
 
@@ -626,6 +715,46 @@ def analyze():
         )
     )
 
+    # =====================================================
+    # CLEANUP TEMPORARY FILES
+    # =====================================================
+
+    # The result page contains the analysis values already,
+    # so the uploaded and processing images are no longer
+    # needed after the report has been rendered.
+
+    temporary_files = [
+        document_path,
+        selfie_path,
+        document_processing_path,
+        selfie_processing_path
+    ]
+
+    # Also remove the generated ELA image if it exists.
+    ela_image_path = ela_result.get("ela_image")
+
+    if ela_image_path:
+        temporary_files.append(
+            ela_image_path
+        )
+
+    for file_path in temporary_files:
+
+        try:
+
+            if file_path and os.path.exists(file_path):
+
+                os.remove(file_path)
+
+        except Exception as error:
+
+            print(
+                "CLEANUP ERROR:",
+                error
+            )
+
+
+    return result_page
 
 # =========================================================
 # RUN
